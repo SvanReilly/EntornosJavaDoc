@@ -1,4 +1,4 @@
-package repaso1y2Trimestre;
+package JAVADOC;
 
 import java.util.Scanner;
 
