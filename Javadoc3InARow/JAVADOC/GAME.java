@@ -26,8 +26,8 @@ public class GAME {
 	 */
 	public GAME() {
 		this.tablero = new TABLERO();
-		this.jugador1 = new JUGADOR("Jugador 1", 'X');
-		this.jugador2 = new JUGADOR("Jugador 2", 'O');
+		this.jugador1 = new JUGADOR("\u001B[32m"+"Jugador 1", 'X');
+		this.jugador2 = new JUGADOR("\u001B[36m"+"Jugador 2", 'O');
 		this.finDePartida = false;
 		this.ganador = null;
 	}
@@ -166,32 +166,5 @@ public class GAME {
 	 * @param jugadorActual para almacenar la informacion del jugador que le toca jugar en cada turno.
 	 * 
 	 */
-	public void empezarPartida() {
-		int fila, columna;
-		JUGADOR jugadorActual = this.jugador1;
-		while (!this.finDePartida) {
-			System.out.println(this.tablero);
-			System.out.println("Turno del jugador " + jugadorActual.getMarkup());
-			fila = pedirCoordenada("fila");
-			columna = pedirCoordenada("columna");
-			while (this.tablero.getCelda(fila, columna).isOcupada()) {
-				System.out.println("La celda esta ocupada. Introduce otra coordenada.");
-				fila = pedirCoordenada("fila");
-				columna = pedirCoordenada("columna");
-			}
-			this.tablero.setCelda(fila, columna, jugadorActual.getMarkup());
-			if (comprobarVictoria(jugadorActual)) {
-				System.out.println(this.tablero);
-				System.out.println("Ha ganado el jugador " + jugadorActual.getName() +  jugadorActual.getMarkup() + ".");
-				this.finDePartida = true;
-				this.ganador = jugadorActual;
-			} else if (comprobarEmpate()) {
-				System.out.println(this.tablero);
-				System.out.println("Empate.");
-				this.finDePartida = true;
-			} else {
-				jugadorActual = cambiarJugador(jugadorActual);
-			}
-		}
-	}
+
 }
