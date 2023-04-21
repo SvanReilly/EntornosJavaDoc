@@ -32,8 +32,8 @@ public class TresEnRaya {
 		final String ANSI_CYAN = "\u001B[36m";
 		final String ANSI_WHITE = "\u001B[37m";
 
-		System.out.println(
-				ANSI_RED + "THREE" + ANSI_RESET + ANSI_YELLOW + "INNA'" + ANSI_RESET + ANSI_GREEN + "ROW" + ANSI_RESET);
+		System.out.println(ANSI_RED + "THREE " + ANSI_RESET + ANSI_YELLOW + "INNA' " + ANSI_RESET + ANSI_GREEN + "ROW."
+				+ ANSI_RESET);
 
 		Scanner sc = new Scanner(System.in);
 
@@ -48,7 +48,9 @@ public class TresEnRaya {
 		System.out.println(juego.getTablero());
 
 		JUGADOR jugadorActual = juego.getJugador1();
+
 		while (!juego.isFinDePartida()) {
+
 			int fila = juego.pedirCoordenada(ANSI_BLUE + "fila" + ANSI_RESET);
 			int columna = juego.pedirCoordenada(ANSI_PURPLE + "columna" + ANSI_RESET);
 
@@ -67,13 +69,13 @@ public class TresEnRaya {
 				System.out.println(ANSI_RED + "Esta celda ya esta ocupada. Introduce otra coordenada." + ANSI_RESET);
 			}
 		}
-
-		if (juego.getGanador() != null) {
+		if (juego.comprobarEmpate()) {
+			System.out
+					.println("Empate de" + juego.getJugador1().getName() + " y " + juego.getJugador2().getName() + ".");
+		} else if (juego.getGanador() != null) {
 			System.out.println(ANSI_WHITE + "Felicidades, " + ANSI_RESET + juego.getGanador().getName() + ANSI_YELLOW
 					+ " con la marca (" + ANSI_RESET + juego.getGanador().getMarkup() + ANSI_YELLOW + ") has ganado."
 					+ ANSI_RESET);
-		} else {
-			System.out.println(ANSI_WHITE + "Empate de" + ANSI_RESET + juego.getJugador1().getName() + ANSI_WHITE + ".");
 		}
 	}
 }

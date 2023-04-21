@@ -21,13 +21,15 @@ public class GAME {
 	/**
 	 * @author Alejandro Ortega Maldonado
 	 * @version 1.1
-	 * @param jugador1 se inicializa en el constructor vacio con un nombre (Jugador 1) y marca por defecto (X).
-	 * @param jugador2 se inicializa en el constructor vacio con un nombre (Jugador 2) y marca por defecto (O).
+	 * @param jugador1 se inicializa en el constructor vacio con un nombre (Jugador
+	 *                 1) y marca por defecto (X).
+	 * @param jugador2 se inicializa en el constructor vacio con un nombre (Jugador
+	 *                 2) y marca por defecto (O).
 	 */
 	public GAME() {
 		this.tablero = new TABLERO();
-		this.jugador1 = new JUGADOR("\u001B[32m"+"Jugador 1", 'X');
-		this.jugador2 = new JUGADOR("\u001B[36m"+"Jugador 2", 'O');
+		this.jugador1 = new JUGADOR("\u001B[32m" + "Jugador 1" + "\u001B[0m", 'X');
+		this.jugador2 = new JUGADOR("\u001B[36m" + "Jugador 2" + "\u001B[0m", 'O');
 		this.finDePartida = false;
 		this.ganador = null;
 	}
@@ -71,6 +73,7 @@ public class GAME {
 	public void setGanador(JUGADOR ganador) {
 		this.ganador = ganador;
 	}
+
 	/**
 	 * @author Alejandro Ortega Maldonado
 	 * @version 1.0
@@ -92,8 +95,9 @@ public class GAME {
 	/**
 	 * @author Alejandro Ortega Maldonado
 	 * @version 1.0
-	 * @param jugadorActual 
-	 * @return Devolvera al jugador1 o jugador2 dependiendo de cual tenga asignado previamente.
+	 * @param jugadorActual
+	 * @return Devolvera al jugador1 o jugador2 dependiendo de cual tenga asignado
+	 *         previamente.
 	 */
 	public JUGADOR cambiarJugador(JUGADOR jugadorActual) {
 		if (jugadorActual == this.jugador1) {
@@ -102,68 +106,76 @@ public class GAME {
 			return this.jugador1;
 		}
 	}
+
 	/**
 	 * @author Alejandro Ortega Maldonado
 	 * @version 1.0
 	 * @param jugador
-	 * @return Devolvera un booleano si la partida ha terminado por victoria de algun jugador
+	 * @return Devolvera un booleano si la partida ha terminado por victoria de
+	 *         algun jugador
 	 */
 	public boolean comprobarVictoria(JUGADOR jugador) {
-	    // Comprobar filas
-	    for (int fila = 0; fila < 3; fila++) {
-	        if (tablero.getCelda(fila, 0).getSimbolo() == jugador.getMarkup() &&
-	            tablero.getCelda(fila, 1).getSimbolo() == jugador.getMarkup() &&
-	            tablero.getCelda(fila, 2).getSimbolo() == jugador.getMarkup()) {
-	            return true;
-	        }
-	    }
-	    
-	    // Comprobar columnas
-	    for (int columna = 0; columna < 3; columna++) {
-	        if (tablero.getCelda(0, columna).getSimbolo() == jugador.getMarkup() &&
-	            tablero.getCelda(1, columna).getSimbolo() == jugador.getMarkup() &&
-	            tablero.getCelda(2, columna).getSimbolo() == jugador.getMarkup()) {
-	            return true;
-	        }
-	    }
-	    
-	    // Comprobar diagonales
-	    if (tablero.getCelda(0, 0).getSimbolo() == jugador.getMarkup() &&
-	        tablero.getCelda(1, 1).getSimbolo() == jugador.getMarkup() &&
-	        tablero.getCelda(2, 2).getSimbolo() == jugador.getMarkup()) {
-	        return true;
-	    }
-	    
-	    if (tablero.getCelda(2, 0).getSimbolo() == jugador.getMarkup() &&
-	        tablero.getCelda(1, 1).getSimbolo() == jugador.getMarkup() &&
-	        tablero.getCelda(0, 2).getSimbolo() == jugador.getMarkup()) {
-	        return true;
-	    }
-	    
-	    return finDePartida;
+		// Comprobar filas
+		for (int fila = 0; fila < 3; fila++) {
+			if (tablero.getCelda(fila, 0).getSimbolo() == jugador.getMarkup()
+					&& tablero.getCelda(fila, 1).getSimbolo() == jugador.getMarkup()
+					&& tablero.getCelda(fila, 2).getSimbolo() == jugador.getMarkup()) {
+				setFinDePartida(true);
+			}
+		}
+
+		// Comprobar columnas
+		for (int columna = 0; columna < 3; columna++) {
+			if (tablero.getCelda(0, columna).getSimbolo() == jugador.getMarkup()
+					&& tablero.getCelda(1, columna).getSimbolo() == jugador.getMarkup()
+					&& tablero.getCelda(2, columna).getSimbolo() == jugador.getMarkup()) {
+				setFinDePartida(true);
+			}
+		}
+
+		// Comprobar diagonales
+		if (tablero.getCelda(0, 0).getSimbolo() == jugador.getMarkup()
+				&& tablero.getCelda(1, 1).getSimbolo() == jugador.getMarkup()
+				&& tablero.getCelda(2, 2).getSimbolo() == jugador.getMarkup()) {
+			setFinDePartida(true);
+		}
+
+		if (tablero.getCelda(2, 0).getSimbolo() == jugador.getMarkup()
+				&& tablero.getCelda(1, 1).getSimbolo() == jugador.getMarkup()
+				&& tablero.getCelda(0, 2).getSimbolo() == jugador.getMarkup()) {
+			setFinDePartida(true);
+		}
+
+		return isFinDePartida();
 	}
+
 	/**
 	 * @author Alejandro Ortega Maldonado
 	 * @version 1.0
-	 * @return Devuelve un booleano en funcion de si todas las celdas estan ocupadas, pero no hay un ganador, en dicho caso habria empate.
+	 * @return Devuelve un booleano en funcion de si todas las celdas estan
+	 *         ocupadas, pero no hay un ganador, en dicho caso habria empate.
 	 */
 	public boolean comprobarEmpate() {
+
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if (!this.tablero.getCelda(i, j).isOcupada()) {
-					return false;
+					setFinDePartida(false);
+				} else {
+					setFinDePartida(true);
 				}
 			}
 		}
-		
-		return true;
+
+		return isFinDePartida();
 	}
 	/**
 	 * @author Alejandro Ortega Maldonado
 	 * @version 1.3
-	 * @param fila para la coordenada de la i en el for del tablero
-	 * @param columna para la coordenada de la j en el for del tablero.
-	 * @param jugadorActual para almacenar la informacion del jugador que le toca jugar en cada turno.
+	 * @param fila          para la coordenada de la i en el for del tablero
+	 * @param columna       para la coordenada de la j en el for del tablero.
+	 * @param jugadorActual para almacenar la informacion del jugador que le toca
+	 *                      jugar en cada turno.
 	 * 
 	 */
 
